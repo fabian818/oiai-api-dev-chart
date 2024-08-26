@@ -22,6 +22,13 @@ spec:
               name: oiai-api-configmap
           - secretRef:
               name: {{ .Values.api.databaseSecret }}
+          autoscaling:
+            enabled: true
+            target: oiai-api
+            minReplicas: 2
+            maxReplicas: 5
+            targetCPUUtilizationPercentage: 80
+            targetMemoryUtilizationPercentage:  80
           resources:
             requests:
               cpu: 0.2
