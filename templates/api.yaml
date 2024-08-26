@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: oiai-api
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: oiai
+    server: https://kubernetes.default.svc
+  project: oiai-dev-project
+  source:
+    chart: oiai-api
+    helm:
+      values: |
+        image: {{ .Values.api.image }}
+        api:
+          command: ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "src.main:app"]
+          envFrom: []
+          - configMapRef:
+              name: oiai-api-configmap
+          - secretRef:
+              name: {{ .Values.api.databaseSecret }}
+          resources:
+            requests:
+              cpu: 0.2
+              memory: 0.3Gi
+            limits:
+              memory: 0.5Gi
+          service:
+            main: 
+              ports:
+                http:
+                  port: 80
+                  targetPort: 8000
+          ingress:
+            main:
+              annotations:
+                alb.ingress.kubernetes.io/group.name: oiai-dev-alb
+                alb.ingress.kubernetes.io/listen-ports: "[{\"HTTPS\":443}]"
+                alb.ingress.kubernetes.io/scheme: internet-facing
+                alb.ingress.kubernetes.io/target-type: ip
+                alb.ingress.kubernetes.io/ssl-policy: "ELBSecurityPolicy-TLS-1-2-2017-01"
+                alb.ingress.kubernetes.io/success-codes: 200,301
+                alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=120
+                alb.ingress.kubernetes.io/certificate-arn: {{ .Values.api.alb.certificateArn }}
+              enabled: true
+              hosts:
+              - host: {{ .Values.api.allowedHost }}
+                paths:
+                - path: /
+                  pathType: Prefix
+                  service:
+                    name: oiai-api
+                    port: 80
+              ingressClassName: alb
+    repoURL: oci://registry-1.docker.io/fabian818
+    targetRevision: {{ .Values.api.version | quote }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true

@@ -1,0 +1,6 @@
+api:
+  image: 
+  version: 0.0.12-29
+  databaseSecret: oiai-db-credentials-secret
+  alb:
+    certificateArn:

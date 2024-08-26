@@ -1,0 +1,5 @@
+apiVersion: v2
+name: oiai-api-dev-chart
+description: A Helm Chart for action applications in development
+type: application
+version: 1.0.0

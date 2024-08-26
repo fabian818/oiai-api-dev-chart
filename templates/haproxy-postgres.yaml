@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: oiai-haproxy-postgres
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: oiai
+    server: https://kubernetes.default.svc
+  project: oiai-dev-project
+  source:
+    repoURL: 'https://charts.bitnami.com/bitnami'
+    targetRevision: '*'
+    helm:
+      parameters:
+        - name: replicaCount
+          value: '1'
+        - name: 'service.type'
+          value: 'ClusterIP'
+      values: |-
+        "configuration": |
+          global
+            log stdout format raw local0
+            maxconn 1024
+          defaults
+            log global
+            timeout client 60s
+            timeout connect 60s
+            timeout server 60s
+          frontend fe_main
+            bind :5432
+            default_backend be_main
+          backend be_main
+            server web1 {{ .Values.api.databaseHost }}:5432
+        "containerPorts":
+        - "containerPort": 5432
+          "name": "tcp"
+        "service":
+          "ports":
+          - "name": "tcp"
+            "port": 5432
+            "protocol": "TCP"
+            "targetPort": "tcp"
+    chart: haproxy
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: oiai
+  syncPolicy:
+    automated: {}
