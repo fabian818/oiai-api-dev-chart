@@ -11,8 +11,8 @@ spec:
     server: https://kubernetes.default.svc
   project: oiai-dev-project
   source:
-    repoURL: oci://registry-1.docker.io/fabian818
-    chart: oiai-api-dev-base-chart
+    repoURL: oci://registry-1.docker.io
+    chart: fabian818/oiai-api-dev-base-chart
     helm:
       values: |
         image: {{ .Values.api.image }}
