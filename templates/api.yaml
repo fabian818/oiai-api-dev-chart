@@ -16,7 +16,7 @@ spec:
     targetRevision: 1.0.0
     helm:
       values: |
-        image: {{ .Values.api.image }}
+        image: 132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-dev-us-east-1-api-repo:development
         api:
           command: ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "src.main:app"]
           envFrom:
