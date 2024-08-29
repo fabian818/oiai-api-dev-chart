@@ -12,7 +12,7 @@ spec:
   project: oiai-dev-project
   source:
     repoURL: oci://registry-1.docker.io/fabian818/oiai-api-base-chart
-    chart: ""
+    chart: oiai-api-base-chart
     helm:
       values: |
         image: {{ .Values.api.image }}
