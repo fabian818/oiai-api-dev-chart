@@ -56,7 +56,7 @@ spec:
                 alb.ingress.kubernetes.io/certificate-arn: {{ .Values.api.alb.certificateArn }}
               enabled: true
               hosts:
-              - host: {{ .Values.api.allowedHost }}
+              - host: api.oiai.thisguydeploys.com
                 paths:
                 - path: /
                   pathType: Prefix
