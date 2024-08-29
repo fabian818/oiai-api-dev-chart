@@ -46,6 +46,6 @@ spec:
     chart: haproxy
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: oiai
+    namespace: apps
   syncPolicy:
     automated: {}
