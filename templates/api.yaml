@@ -62,7 +62,7 @@ spec:
                     name: oiai-api
                     port: 80
               ingressClassName: alb
-    
+    path: .
     targetRevision: {{ .Values.api.version | quote }}
   syncPolicy:
     automated:
