@@ -11,7 +11,8 @@ spec:
     server: https://kubernetes.default.svc
   project: oiai-dev-project
   source:
-    repoURL: oci://registry-1.docker.io/fabian818/oiai-api-base-chart
+    repoURL: oci://registry-1.docker.io/fabian818
+    chart: oiai-api-base-chart
     helm:
       values: |
         image: {{ .Values.api.image }}
@@ -62,7 +63,6 @@ spec:
                     name: oiai-api
                     port: 80
               ingressClassName: alb
-    path: .
     targetRevision: {{ .Values.api.version | quote }}
   syncPolicy:
     automated:
