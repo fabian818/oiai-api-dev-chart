@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: http://dg-oiai-charts.s3-website-us-east-1.amazonaws.com/charts/
     chart: oiai-api-base-chart
-    targetRevision: *
+    targetRevision: "*"
     helm:
       values: |
         image: {{ .Values.api.image }}
