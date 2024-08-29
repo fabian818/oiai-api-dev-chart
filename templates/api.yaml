@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: oiai-dev-project
   source:
-    repoURL: oci://132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-api-base-chart
+    repoURL: s3://dg-oiai-charts/charts
     chart: oiai-api-base-chart
     targetRevision: v0.0.1
     helm:
