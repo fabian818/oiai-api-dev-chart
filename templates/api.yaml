@@ -11,9 +11,9 @@ spec:
     server: https://kubernetes.default.svc
   project: oiai-dev-project
   source:
-    repoURL: s3://dg-oiai-charts/charts
+    repoURL: http://dg-oiai-charts.s3-website-us-east-1.amazonaws.com/charts/
     chart: oiai-api-base-chart
-    targetRevision: 0.0.1
+    targetRevision: *
     helm:
       values: |
         image: {{ .Values.api.image }}
