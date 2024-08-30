@@ -1,6 +1,6 @@
 api:
   image: 132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-dev-us-east-1-api-repo:development
-  version: v0.0.1
+  version: 1.0.0
   databaseSecret: oiai-db-credentials-secret
   alb:
     certificateArn: arn:aws:acm:us-east-1:132900311735:certificate/70531e5b-99c7-4aa2-b41f-18c363c30f69
