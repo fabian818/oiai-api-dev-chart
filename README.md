@@ -7,6 +7,7 @@ This Helm chart is used to deploy the `oiai-backend` service and manage its conf
 ``` bash
 .
 ├── Chart.yaml         # Helm chart metadata
+├── .argocd-source-api-dev.yaml # File uplodaded by argocd-image-updater
 ├── templates          # Templates for Kubernetes resources
 │   ├── api-configmap.yml     # ConfigMap for API configuration
 │   ├── api.yaml              # Deployment and Service for the API
