@@ -19,6 +19,15 @@ spec:
         image: 132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-dev-us-east-1-api-repo:development
         imagePullSecrets: []
         api:
+          initContainers:
+            1-wait-for-migrations:
+              image: 132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-dev-us-east-1-api-repo:development
+              envFrom:
+          - configMapRef:
+              name: oiai-api-configmap
+          - secretRef:
+              name: {{ .Values.api.databaseSecret }}
+              command: ["alembic", "upgrade", "head"]
           command: ["uvicorn", "--host", "0.0.0.0", "--port", "8000", "app.main:app", "--reload"]
           envFrom:
           - configMapRef:
