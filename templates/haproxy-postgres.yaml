@@ -33,7 +33,7 @@ spec:
             bind :5432
             default_backend be_main
           backend be_main
-            server web1 {{ .Values.api.databaseHost }}:5432
+            server web1 oiaidb.czi6ytvlzsu9.us-east-1.rds.amazonaws.com:5432
         "containerPorts":
         - "containerPort": 5432
           "name": "tcp"
