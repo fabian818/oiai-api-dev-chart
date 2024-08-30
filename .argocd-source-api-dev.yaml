@@ -4,5 +4,5 @@ helm:
     value: $ARGOCD_APP_REVISION
     forcestring: false
   - name: api.image
-    value: 132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-dev-us-east-1-api-repo@sha256:e18b6d4f877ffc96ab66e9a903f7e43edc1da901c7a8598007e3294f5f48bd75
+    value: 132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-dev-us-east-1-api-repo@sha256:5cb46b5bbbf2a65a422b2060e2bf8e27e291de6fb752abf1df50b53941cb6461
     forcestring: true
