@@ -1,5 +1,5 @@
 api:
-  image: 132900311735.dkr.ecr.us-east-1.amazonaws.com/oiai-dev-us-east-1-api-repo:development
+  image:
   version: 1.0.0
   databaseSecret: oiai-db-credentials-secret
   alb:
